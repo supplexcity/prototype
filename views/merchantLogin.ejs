@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Register New Merchant</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark">
+  		<span class="navbar-brand mb-2 h1"><center>NEW MERCHANT REGISTRATION!</center></span>
+	</nav>
+	<br>
+	<div class="container">
+	<form  action="/register" method="POST">
+	  <div class="form-group">
+	    <label for="exampleInputEmail1">Email address</label>
+	    <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+	    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputEmail1">Username</label>
+	    <input name="username" type="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username">
+	    <small id="emailHelp" class="form-text text-muted">This will be used as your Login Username.</small>
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputPassword1">Enter your Password</label>
+	    <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+	  	<small id="emailHelp" class="form-text text-muted">Prefer having a strong password for better security.</small>
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputEmail1">Location</label>
+	    <input name="location" type="place" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Place">
+	    <small id="emailHelp" class="form-text text-muted">Place where you serve your utility.</small>
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputEmail1">Enter Tags.</label>
+	    <input name="tags" type="tags" class="form-control" id="exampleInputEmail1" data-role="tagsinput" aria-describedby="emailHelp" placeholder="Enter tags">
+	    <small id="emailHelp" class="form-text text-muted">Tags will help users to reach you!</small>
+	  </div>
+	  <div class="form-group form-check">
+	    <input name="agree" type="checkbox" class="form-check-input" id="exampleCheck1">
+	    <label class="form-check-label" for="exampleCheck1">Do you agree to our Terms & Conditions?</label>
+	  </div>
+	  <button type="submit" class="btn btn-primary">Apply for Approval!</button>
+	</form>
+</div>
+<br><br>
+</body>
+</html>
