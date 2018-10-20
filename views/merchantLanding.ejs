@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>afd</title>
+<style text="text/css">
+#logout{
+	margin-right: 50px;
+}
+.navbar-brand{
+	display: inline-block;
+    text-align: center;
+}
+#main{
+	margin-top:30px;
+}
+
+</style>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<body>
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="navbar-brand">Hello <%=merchant%></a>
+  <button class="btn btn-outline-success my-2 my-sm-0" id="logout">Logout</button>
+</nav>
+<div class="card-deck mb-3 text-center" id="main">
+
+        <div class="card mb-4 box-shadow" width="20%">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Merchant Info</h4>
+          </div>
+          <button type="button" class="btn btn-primary" style="margin: 15px 5px 15px 5px">Profile</button>
+          <button type="button" class="btn btn-primary" style="margin: 15px 5px 15px 5px">Create Promo</button>
+          
+        </div>
+        <div class="card mb-4 box-shadow">
+
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Book Tickets</h4>
+            <form>
+  		<div class="form-group">
+    	<label for="name">Enter name</label>
+    <input type="email" class="form-control" placeholder="Enter Name of Person">
+  </div>
+  <div class="form-group">
+    <label for="numberTickets">Enter number of tickets</label>
+    <input type="number" class="form-control" placeholder="Number of Tickets">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Book Now</button>
+</form>
+          </div>
+          <div class="card-body">
+            
+          </div>
+        </div>
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Ticket Information</h4>
+          </div>
+          <div class="card-body">
+            <h3> Today's Transaction </h3><br>
+            <h5>Number of Tickets Sold : <%=soldTickets%></h5>
+            <h5>Tickets Left : <%=leftTickets%> </h5>
+            <h5> Today's Transaction Amount <%=amount%></h5>
+            <a>
+          </div>
+        </div>
+      </div>
+</body>
+<html>

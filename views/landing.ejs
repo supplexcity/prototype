@@ -1,0 +1,126 @@
+<html lang="en"><head>
+    <title>User Landing Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style type="text/css">
+      .accessory {
+            height: 6px;
+            background-image: radial-gradient(
+              closest-side,
+              hsla(0, 0%, 50%, 1.0),
+              hsla(0, 0%, 50%, 0) 100%);
+            position: relative; 
+                }
+    </style>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Hello There</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          
+        </ul>
+      </div>
+    </nav>
+    <br><br><br>
+    <main role="main">
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-md-3">
+            <h2>Offers!</h2>
+            <!--HERE IS THE EJS STUFF TO PRINT ALL THE OFFERS-->
+            <ul class="list-group">
+              <% Offers.forEach(function(Offer) { %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <!-- <img src="https://lifegurumovies.com/wp-content/uploads/2017/06/Offers.jpg" class="img-thumbnail" height="100px" width="100px"> -->
+                <p><!= Offer.text !></p>
+                <p>HELllo there this is just random text</p>
+                <br>
+                <button type="button" class="btn btn-info btn-sm">Know More</button>
+              </li>
+              <% } %}
+            </ul>
+            <!--ENDS HERE-->
+            <p><a class="btn btn-secondary" href="#" role="button">View More</a></p>
+          </div>
+          <div class="col-md-6">
+            <h2>Search Place/Tag</h2>
+            <form action="/search" method="POST">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Name of Place/Tag</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Place/Tag">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Search Type</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Place</option>
+                  <option>Tag</option>
+                </select>
+              </div>
+              <a class="btn btn-secondary" href="#" role="button">Search!</a></p>
+            </form>
+            <hr class="accessory">
+            <div class="ui divided items">
+              <% destinations.forEach(function(destination){ %>
+                <div class="item">
+                    <div class="image">
+                        <img src="<%= destination.image %>">
+                    </div>
+                    <div class="meta">
+                        <span> Price - Rs<%= destination.price %></span>
+                    </div>
+                <div class="content">
+                    <a class="header" href="/blogs/<%= destination._id %>"><%= destination.title %></a>
+                    <div class="description">
+                        <p><%= destination.body.substring(0, 100) %>...</p>
+                    </div>
+                    <div class="extra">
+                        <a class="ui floated basic violet button" href="/blogs/<%= destination._id %>">
+                            Read More
+                            <i class="right chevron icon"></i>
+                        </a>
+                    </div>
+                </div>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+           <div class="col-md-3">
+            <div>
+              <h2>Login Here</h2>
+              <p>Existing users may login through the link down here.</p>
+              <p><a name="userLogin" class="btn btn-secondary" href="#" role="button">User Login</a></p>
+              <hr class="accessory">
+              <p>Existing merchant may login through the link down here.</p>
+              <p><a name="merchantLogin" class="btn btn-secondary" href="#" role="button">Merchant Login</a></p>
+            </div>
+            <hr>
+            <div>
+              <h2>Register Here</h2>
+              <p>New users can register with us through the link down here.</p>
+              <p><a name="userRegister" class="btn btn-secondary" href="#" role="button">User Login</a></p>
+            </div> 
+          </div> 
+        </div>
+
+        <hr>
+
+      </div> <!-- /container -->
+
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+  
+
+</body></html>

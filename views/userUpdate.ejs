@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Update User Detail</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark">
+  		<span class="navbar-brand mb-2 h1"><center>EDIT USER DETAIL</center></span>
+	</nav>
+	<br>
+	<div class="container">
+	<form  action="/user/update" method="POST">
+	  <div class="form-group">
+	    <label for="exampleInputEmail1">Email address</label>
+	    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=<!= user.email !>>
+	    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputEmail1">Username</label>
+	    <input type="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=<!= user.username !>>
+	    <small id="emailHelp" class="form-text text-muted">This will be used as your Login Username.</small>
+	  </div>
+	  <div class="form-group form-check">
+	    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+	    <label class="form-check-label" for="exampleCheck1">Do you agree to our Terms & Conditions?</label>
+	  </div>
+	  <button type="submit" class="btn btn-primary">Update Your Details!</button>
+	</form>
+</div>
+</body>
+</html>
