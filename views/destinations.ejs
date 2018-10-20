@@ -1,0 +1,30 @@
+<% include partials/header %>
+
+<div class="container">
+	
+	<header class="jumbotron">
+		<h1>Welcome to Travel Test App!!:)</h1>
+		<p>Our hand-picked destinations from all across the globe!</p>
+		<!-- <p>
+			<a class="btn btn-primary btn-large" href="/campgrounds/new">Add New Campground</a>
+		</p> -->
+	</header>
+
+	<div class="row">
+		<% destinations.forEach(function(destination){ %>
+    	<div class="col-lg-4 col-md-6">
+    		<div class="card mb-4 box-shadow">
+    			<img class="card-img-top" src="<%= destination.image %>">
+    			<div class="card-body">
+    				<p class="card-text"><%= destination.name %></p>
+    				<a href="#" class="btn btn-primary">More Info</a>
+    			</div>
+    		</div>
+    	</div>
+    	<% }) %>
+    </div>
+		
+</div>
+
+
+<% include partials/footer %>

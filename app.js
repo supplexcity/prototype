@@ -6,7 +6,11 @@ var express 		= require("express"),
 	LocalStrategy 	= require("passport-local"),
 	passportLocalMongoose = require("passport-local-mongoose"),
 	User 			= require("./models/user"),
-	Merchant 		= require("./models/merchant");
+	Merchant 		= require("./models/merchant"),
+	Destination		= require("./models/destination"),
+	seedDB			= require("./seeds");
+
+seedDB();
 
 mongoose.connect("mongodb://localhost/travel_test_app");
 app.use(bodyParser.urlencoded({extended:true}));
@@ -29,6 +33,18 @@ app.get("/",function(req,res){
 	res.render("home.ejs");
 });
 
+app.get("/destinations",function(req,res){
+	Destination.find({},function(err,alldestinations){
+		if(err){
+			console.log(err);
+		} else{
+			res.render("destinations.ejs",{destinations : alldestinations});
+		}
+	})
+});
+
+
+//AUTHENTICATION ROUTES
 app.get("/userRegister",function(req,res){
 	res.render("userRegister.ejs");
 });
