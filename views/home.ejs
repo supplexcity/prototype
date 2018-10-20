@@ -1,18 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
 <% include partials/header %>
-<div class="container">
-<header class="jumbotron">
-  <h1>Travel Test App!!</h1>
-  <h4><p>Headout beta version :p</p></h4>
-</header>
+<style>
+body
+    {
+    width: 100%;
+    height: 100%;
+    background-image:url(https://twimg0-a.akamaihd.net/a/1350072692/t1/img/front_page/jp-mountain@2x.jpg);
+    background-size: cover;
+    background-attachment:fixed;
+    margin: 0;
+    padding: 0;
+    }
 
+    .hvrbox,
+.hvrbox * {
+  box-sizing: border-box;
+}
+
+#nish
+{
+  background-image: linear-gradient(#C6FFDD,#FBD786,#f7797d );
+}
+.hvrbox {
+width: 100%;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  max-width: 100%;
+  height:500px;
+  margin-bottom:100px;
+}
+.hvrbox img {
+    display: block;
+    width: 100%;
+    max-width: 1200px; /* corresponds to max height of 450px */
+    margin: 0 auto;
+}
+.hvrbox .hvrbox-layer_bottom {
+  display: block;
+}
+.hvrbox .hvrbox-layer_top {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 15px;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -ms-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+}
+.hvrbox:hover .hvrbox-layer_top,
+.hvrbox.active .hvrbox-layer_top {
+  opacity: 1;
+}
+.hvrbox .hvrbox-text {
+  text-align: center;
+  font-size: 18px;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.hvrbox .hvrbox-text_mobile {
+  font-size: 15px;
+  border-top: 1px solid rgb(179, 179, 179); /* for old browsers */
+  border-top: 1px solid rgba(179, 179, 179, 0.7);
+  margin-top: 5px;
+  padding-top: 2px;
+  display: none;
+}
+.hvrbox.active .hvrbox-text_mobile {
+  display: block;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<!--<header class="jumbotron">
+-->
+<div class="hvrbox" id="bg">
+  <img src="https://stmed.net/sites/default/files/extreme-wallpapers-31057-4139352.jpg" alt="Mountains" class="hvrbox-layer_bottom"  >
+  <div class="hvrbox-layer_top">
+    <div class="hvrbox-text"><h1>Travel Test App!!</h1>
+  <h4><p>Headout beta version :p</p></h4></div>
+  </div>
+</div>
+ 
   <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 box-shadow">
+        <div class="card mb-4 box-shadow" id="nish">
           <div class="card-header">
             <h4 class="my-0 font-weight-normal">Register</h4>
           </div>
           <div class="card-body">
               
-                <div>
+                <div >
               <p>New users may sign up here for free!</p>
               <p><a name="userLogin" class="btn btn-secondary" href="/userRegister" role="button">User Register</a></p>
               <hr class="accessory">
@@ -23,20 +117,20 @@
 
           </div>
         </div>
-        <div class="card mb-4 box-shadow">
+        <div class="card mb-4 box-shadow" id="nish">
           <div class="card-header">
             <h4 class="my-0 font-weight-normal">Search</h4>
           </div>
           <div class="card-body">
             <form action="/search">
-  <div class="form-group">
+  <div class="form-group" >
     <input type="text" class="form-control" placeholder="Enter city name" name="cityname">
   </div>
   <button type="submit" class="btn btn-primary">Explore</button>
 </form>
           </div>
         </div>
-        <div class="card mb-4 box-shadow">
+        <div class="card mb-4 box-shadow" id="nish">
           <div class="card-header">
             <h4 class="my-0 font-weight-normal">Login</h4>
           </div>
@@ -55,4 +149,6 @@
         </div>
       </div>
 </div>
+</body>
 <% include partials/footer %>
+</html>
