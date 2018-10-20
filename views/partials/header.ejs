@@ -6,9 +6,34 @@
 </head>
 <body>
 
-	<br>
-	<br>
-	<br>
+  <nav class="navbar  sticky-top navbar-expand-lg navbar-light bg-light" style="margin-bottom:20px">
+  <a class="navbar-brand" href="/">Indian365</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <%if(currentUser){%>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Account Balance</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#" style="color:white;background:black">
+        <%= currentUser.balance %>.00</a>
+      </li>
+      <%}%>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        <%if(currentUser){%>
+        <li class="nav-item active"><a class="nav-link" href="/history">Bet History<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item active"><a class="nav-link" href="/withdraw">Withdraw<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item active"><a class="nav-link" href="/logout">Log Out<span class="sr-only">(current)</span></a></li>
+        <%}%>
+    </ul>
+  </div>
+</nav>
 
 <div class="container">
   <% if(error && error.length>0){ %>

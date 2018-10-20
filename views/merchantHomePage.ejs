@@ -1,0 +1,24 @@
+<% include partials/header %>
+
+<div class="container">
+	
+	<header class="jumbotron">
+		<h1>Welcome to Travel Test App!!:)</h1>
+		<p>Our hand-picked destinations from all across the globe!</p>
+		<!-- <p>
+			<a class="btn btn-primary btn-large" href="/campgrounds/new">Add New Campground</a>
+		</p> -->
+	</header>
+
+	<div>
+		<h5>Tickets Left = <%= destination.ticketsCount %></h5>
+		<form action="/destinations/<%= destination._id %>/booking/ticketsByMerchant" method="POST">
+			<input type="number" name="quantity" placeholder="Enter number of tickets">
+			<button>Confirm Booking!</button>
+		</form>
+    </div>
+		
+</div>
+
+
+<% include partials/footer %>

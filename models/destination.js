@@ -4,6 +4,7 @@ var destinationSchema = new mongoose.Schema({
 	image: String,
 	description: String,
 	price: Number,
+	ticketsCount: Number
 	/*comments:[
 		{
 			type: mongoose.Schema.Types.ObjectId,

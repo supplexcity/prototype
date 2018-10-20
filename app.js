@@ -10,6 +10,7 @@ var express 		= require("express"),
 	Destination		= require("./models/destination"),
 	Ticket 			= require("./models/ticket"),
 	flash = require("connect-flash"),
+	back = require("express-back"),
 	seedDB			= require("./seeds");
 
 seedDB();
@@ -31,6 +32,8 @@ passport.deserializeUser(User.deserializeUser());
 //passport.use(new LocalStrategy(Merchant.authenticate()));
 //passport.serializeUser(Merchant.serializeUser());
 //passport.deserializeUser(Merchant.deserializeUser());
+app.use(back());
+
 
 app.use(function(req,res,next){
 	res.locals.currentUser = req.user;
@@ -87,6 +90,29 @@ app.post("/destinations/:id/booking/tickets",function(req,res){
 	});
 });
 
+app.post("/destinations/:id/booking/ticketsByMerchant",function(req,res){
+	Destination.findById(req.params.id,function(err,foundDestination){
+		console.log(foundDestination.price);
+		var total = req.body.quantity * foundDestination.price;
+		
+			req.user.balance=req.user.balance+total;
+			//req.user.save();
+			Ticket.create({
+				merchant: req.user.username,
+			},function(err,ticket){
+			if(err){
+				console.log(err);
+			} else{
+				req.user.tickets.push(ticket);
+				req.user.save();
+			}
+		});
+		console.log("TICKET GENERATED SUCCESSFULLY");
+		res.back();
+		req.flash("success","TICKET GENERATED SUCCESSFULLY, DO MORE BOOKINGS:)");
+	});
+});
+
 app.get("/destinations",function(req,res){
 	Destination.find({},function(err,alldestinations){
 		if(err){
@@ -120,7 +146,7 @@ app.get("/destinations/:id/booking",isLoggedIn,function(req,res){
 
 
 
-app.post("/ticket",function(req,res){
+/*app.post("/ticket",function(req,res){
 	var amount = req.body.amount;
 	console.log("BET TIME "+hour+ " "+ minute+" "+second);
 	if(hour+5<25){
@@ -150,6 +176,18 @@ app.post("/ticket",function(req,res){
 		req.flash("error","DEADLINE OVER, BET NOT PLACED!!");
 		res.redirect("/main");
 	}
+});*/
+
+app.get("/merchantHomePage/:id",function(req,res){
+	Destination.findOne({_id: req.params.id},function(err,foundDestination){
+		if(err){
+			console.log(foundDestination);
+			console.log(err);
+		} else{
+			console.log(foundDestination);
+			res.render("merchantHomePage.ejs",{destination : foundDestination});
+		}
+	})
 });
 
 /*app.get("/search/:place",function(req,res){
