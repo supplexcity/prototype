@@ -5,7 +5,13 @@ var userSchema = new mongoose.Schema({
 	username: String,
 	email: String,
 	password: String,
-	balance: Number
+	balance: Number,
+	tickets:[
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Ticket"
+		}
+	]
 });
 
 userSchema.plugin(passportLocalMongoose);

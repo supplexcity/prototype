@@ -6,7 +6,13 @@ var merchantSchema = new mongoose.Schema({
 	email: String,
 	password: String,
 	location: String,
-	balance: Number
+	balance: Number,
+	tickets:[
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Ticket"
+		}
+	]
 });
 
 merchantSchema.plugin(passportLocalMongoose);

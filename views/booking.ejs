@@ -1,10 +1,17 @@
 <% include partials/header %>
-
 <div class="container">
-	<h5>Rate = <%= destination.price %></h5>
-	<form action="/" method="POST">
-		<button>Confirm booking!</button>
-	</form>
+  <h5>Rate = <%= destination.price %></h5>
+        <form action="/destinations/<%= destination._id %>/booking/tickets" method="POST">
+  <div class="form-group">
+    <label>Enter number of tickets to be booked:</label>
+    <input type="number" class="form-control" placeholder="1" name="quantity">
+  </div>
+  <div class="form-group">
+    <label>Balance credits:</label>
+    <input type="text" class="form-control" placeholder="<%= currentUser.balance %>" readonly>
+  </div>
+  <button type="submit" class="btn btn-primary">Confirm Booking!</button>
+</form>
 </div>
 
-<% include partials/footer %>
+<% include partials/header %>
