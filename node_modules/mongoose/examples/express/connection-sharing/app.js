@@ -1,14 +1,13 @@
 
-'use strict';
-const express = require('express');
-const mongoose = require('../../../lib');
+var express = require('express');
+var mongoose = require('../../../lib');
 
-const uri = 'mongodb://localhost/mongoose-shared-connection';
+var uri = 'mongodb://localhost/mongoose-shared-connection';
 global.db = mongoose.createConnection(uri);
 
-const routes = require('./routes');
+var routes = require('./routes');
 
-const app = express();
+var app = express();
 app.get('/', routes.home);
 app.get('/insert', routes.insert);
 app.get('/name', routes.modelName);

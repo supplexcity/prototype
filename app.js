@@ -15,6 +15,8 @@ var express 		= require("express"),
 
 seedDB();
 
+//mongoose.connect("mongodb://mohit:password123@ds125831.mlab.com:25831/pahuja_19");
+//mongoose.connect("mongodb://mohit:password123@ds237563.mlab.com:37563/prototype");
 mongoose.connect("mongodb://localhost/travel_test_app");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(flash());
@@ -29,9 +31,9 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-//passport.use(new LocalStrategy(Merchant.authenticate()));
-//passport.serializeUser(Merchant.serializeUser());
-//passport.deserializeUser(Merchant.deserializeUser());
+passport.use(new LocalStrategy(Merchant.authenticate()));
+passport.serializeUser(Merchant.serializeUser());
+passport.deserializeUser(Merchant.deserializeUser());
 app.use(back());
 
 
@@ -180,11 +182,11 @@ app.get("/destinations/:id/booking",isLoggedIn,function(req,res){
 
 app.get("/merchantHomePage/:id",function(req,res){
 	Destination.findOne({_id: req.params.id},function(err,foundDestination){
-		if(err){
-			console.log(foundDestination);
+		if(err || !foundDestination){
+			console.log(foundDestination.ticketsCount);
 			console.log(err);
 		} else{
-			console.log(foundDestination);
+			console.log(foundDestination.ticketsCount);
 			res.render("merchantHomePage.ejs",{destination : foundDestination});
 		}
 	})
@@ -215,13 +217,12 @@ app.get("/userHomePage",isLoggedIn,function(req,res){
 
 app.get("/logout",function(req,res){
 	req.logout();
-	res.redirect("/campGrounds");
+	res.redirect("/");
 });
 
 //AUTHENTICATION ROUTES
 app.get("/userRegister",function(req,res){
 	res.render("userRegister.ejs");
-	req.flash("success","LOGGED IN SUCCESSFULLY!");
 });
 
 app.post("/userRegister",function(req,res){
@@ -249,7 +250,7 @@ app.post("/merchantRegister",function(req,res){
 			return res.render("merchantRegister.ejs");
 		}
 		passport.authenticate("local")(req,res,function(){
-			res.redirect("/merchantHomePage");
+			res.redirect("/destinations");
 		});
 	});
 });

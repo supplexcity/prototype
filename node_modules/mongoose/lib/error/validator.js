@@ -2,9 +2,8 @@
  * Module dependencies.
  */
 
-'use strict';
-
-const MongooseError = require('./');
+var MongooseError = require('../error.js');
+var errorMessages = MongooseError.messages;
 
 /**
  * Schema validator error
@@ -15,26 +14,19 @@ const MongooseError = require('./');
  */
 
 function ValidatorError(properties) {
-  let msg = properties.message;
+  var msg = properties.message;
   if (!msg) {
-    msg = MongooseError.messages.general.default;
+    msg = errorMessages.general.default;
   }
 
-  const message = this.formatMessage(msg, properties);
-  MongooseError.call(this, message);
-
-  properties = Object.assign({}, properties, { message: message });
-  this.name = 'ValidatorError';
-  if (Error.captureStackTrace) {
-    Error.captureStackTrace(this);
-  } else {
-    this.stack = new Error().stack;
-  }
   this.properties = properties;
+  var message = this.formatMessage(msg, properties);
+  MongooseError.call(this, message);
+  this.stack = new Error().stack;
+  this.name = 'ValidatorError';
   this.kind = properties.type;
   this.path = properties.path;
   this.value = properties.value;
-  this.reason = properties.reason;
 }
 
 /*!
@@ -45,27 +37,13 @@ ValidatorError.prototype = Object.create(MongooseError.prototype);
 ValidatorError.prototype.constructor = MongooseError;
 
 /*!
- * The object used to define this validator. Not enumerable to hide
- * it from `require('util').inspect()` output re: gh-3925
- */
-
-Object.defineProperty(ValidatorError.prototype, 'properties', {
-  enumerable: false,
-  writable: true,
-  value: null
-});
-
-/*!
  * Formats error messages
  */
 
 ValidatorError.prototype.formatMessage = function(msg, properties) {
-  if (typeof msg === 'function') {
-    return msg(properties);
-  }
-  const propertyNames = Object.keys(properties);
-  for (let i = 0; i < propertyNames.length; ++i) {
-    const propertyName = propertyNames[i];
+  var propertyNames = Object.keys(properties);
+  for (var i = 0; i < propertyNames.length; ++i) {
+    var propertyName = propertyNames[i];
     if (propertyName === 'message') {
       continue;
     }

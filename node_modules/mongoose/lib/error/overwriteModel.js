@@ -3,9 +3,7 @@
  * Module dependencies.
  */
 
-'use strict';
-
-const MongooseError = require('./');
+var MongooseError = require('../error.js');
 
 /*!
  * OverwriteModel Error constructor.
@@ -15,12 +13,8 @@ const MongooseError = require('./');
 
 function OverwriteModelError(name) {
   MongooseError.call(this, 'Cannot overwrite `' + name + '` model once compiled.');
+  Error.captureStackTrace && Error.captureStackTrace(this, arguments.callee);
   this.name = 'OverwriteModelError';
-  if (Error.captureStackTrace) {
-    Error.captureStackTrace(this);
-  } else {
-    this.stack = new Error().stack;
-  }
 }
 
 /*!

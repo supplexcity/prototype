@@ -35,7 +35,6 @@ function seedDB(){
 			if(err){
 				console.log(err);
 			} else{
-				console.log("new campground added!");
 				/*Comment.create({
 					text: "nice place.....enjoy the vacations",
 					author: "Hermione"*/

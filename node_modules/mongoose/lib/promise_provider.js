@@ -1,11 +1,8 @@
 /*!
- * ignore
+ * Module dependencies.
  */
 
-'use strict';
-
-const assert = require('assert');
-const mquery = require('mquery');
+var MPromise = require('./promise');
 
 /**
  * Helper for multiplexing promise implementations
@@ -13,8 +10,8 @@ const mquery = require('mquery');
  * @api private
  */
 
-const store = {
-  _promise: null
+var Promise = {
+  _promise: MPromise
 };
 
 /**
@@ -22,9 +19,8 @@ const store = {
  *
  * @api private
  */
-
-store.get = function() {
-  return store._promise;
+Promise.get = function() {
+  return Promise._promise;
 };
 
 /**
@@ -33,17 +29,23 @@ store.get = function() {
  * @api private
  */
 
-store.set = function(lib) {
-  assert.ok(typeof lib === 'function',
-    `mongoose.Promise must be a function, got ${lib}`);
-  store._promise = lib;
-  mquery.Promise = lib;
+Promise.set = function(lib) {
+  if (lib === MPromise) {
+    return Promise.reset();
+  }
+  Promise._promise = require('./ES6Promise');
+  Promise._promise.use(lib);
+  require('mquery').Promise = Promise._promise.ES6;
 };
 
-/*!
- * Use native promises by default
+/**
+ * Resets to using mpromise
+ *
+ * @api private
  */
 
-store.set(global.Promise);
+Promise.reset = function() {
+  Promise._promise = MPromise;
+};
 
-module.exports = store;
+module.exports = Promise;
