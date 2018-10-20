@@ -38,11 +38,21 @@ app.get("/destinations",function(req,res){
 		if(err){
 			console.log(err);
 		} else{
+			console.log("reached successfully");
 			res.render("destinations.ejs",{destinations : alldestinations});
 		}
 	})
 });
 
+app.get("/destinations/:id",function(req,res){
+	Destination.findOne({_id: req.params.id},function(err,foundDestination){
+		if(err||!foundDestination){
+			console.log(err);
+		} else{
+			res.render("show.ejs",{destination: foundDestination});
+		}
+	});
+});
 
 //AUTHENTICATION ROUTES
 app.get("/userRegister",function(req,res){
