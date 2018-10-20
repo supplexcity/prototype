@@ -8,12 +8,14 @@ var express 		= require("express"),
 	User 			= require("./models/user"),
 	Merchant 		= require("./models/merchant"),
 	Destination		= require("./models/destination"),
+	flash = require("connect-flash"),
 	seedDB			= require("./seeds");
 
 seedDB();
 
 mongoose.connect("mongodb://localhost/travel_test_app");
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(flash());
 
 app.use(require("express-session")({
 	secret: "Headout got 10M funding :o !",
@@ -29,8 +31,16 @@ passport.use(new LocalStrategy(Merchant.authenticate()));
 passport.serializeUser(Merchant.serializeUser());
 passport.deserializeUser(Merchant.deserializeUser());
 
+app.use(function(req,res,next){
+	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
+	next();
+});
+
 app.get("/",function(req,res){
 	res.render("home.ejs");
+	res.flash("success", "WELCOME TO TRAVEL TEST APP!!");
 });
 
 app.get("/destinations",function(req,res){
@@ -54,9 +64,24 @@ app.get("/destinations/:id",function(req,res){
 	});
 });
 
+app.get("/destinations/:id/booking",isLoggedIn,function(req,res){
+	Destination.findOne({_id: req.params.id},function(err,foundDestination){
+		if(err||!foundDestination){
+			console.log(err);
+		} else{
+			res.render("booking.ejs",{destination: foundDestination});
+		}
+	});
+});
+
+app.get("/userHomePage",isLoggedIn,function(req,res){
+	res.render("userHomePage.ejs");
+});
+
 //AUTHENTICATION ROUTES
 app.get("/userRegister",function(req,res){
 	res.render("userRegister.ejs");
+	res.flash("success","LOGGED IN SUCCESSFULLY!");
 });
 
 app.post("/userRegister",function(req,res){
@@ -96,6 +121,20 @@ app.get("/merchantLogin",function(req,res){
 app.get("/userLogin",function(req,res){
 	res.render("userLogin.ejs");
 });
+
+app.post("/userLogin",passport.authenticate("local",{
+	successRedirect: "/userHomePage",
+	failureRedirect: "/userLogin"
+}),function(req,res){});
+
+//middleware
+function isLoggedIn(req,res,next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	req.flash("error","PLEASE LOGIN FIRST!!");
+	res.redirect("/userLogin");
+}
 
 app.listen(process.env.PORT||2008,function(){
 	console.log("SERVER STARTED");
