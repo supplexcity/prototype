@@ -31,9 +31,9 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-passport.use(new LocalStrategy(Merchant.authenticate()));
-passport.serializeUser(Merchant.serializeUser());
-passport.deserializeUser(Merchant.deserializeUser());
+//passport.use(new LocalStrategy(Merchant.authenticate()));
+//passport.serializeUser(Merchant.serializeUser());
+//passport.deserializeUser(Merchant.deserializeUser());
 app.use(back());
 
 
@@ -87,7 +87,7 @@ app.post("/destinations/:id/booking/tickets",function(req,res){
 		req.flash("success","TICKET GENERATED SUCCESSFULLY, DO MORE BOOKINGS:)");
 	}else{
 		req.flash("error","ACCOUNT BALANCE INSUFFICIENT");
-		res.render("/destinations");
+		res.redirect("/destinations");
 	}
 	});
 });
@@ -211,7 +211,7 @@ app.get("/merchantHomePage/:id",function(req,res){
 	})
 });*/
 
-app.get("/userHomePage",isLoggedIn,function(req,res){
+app.get("/userHomePage",function(req,res){
 	res.render("userHomePage.ejs");
 });
 
@@ -258,7 +258,9 @@ app.post("/merchantRegister",function(req,res){
 app.post("/userLogin",passport.authenticate("local",{
 	successRedirect: "/destinations",
 	failureRedirect: "/userLogin"
-}),function(req,res){});
+}),function(req,res){
+	res.render("/userHomePage");
+});
 
 //middleware
 function isLoggedIn(req,res,next){
